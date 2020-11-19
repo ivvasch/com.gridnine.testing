@@ -10,7 +10,6 @@ public class MyZoneId {
     public long zoneId(LocalDateTime localDateTime) {
         ZoneId id = ZoneId.systemDefault();
         ZonedDateTime zdt = ZonedDateTime.of(localDateTime, id);
-        long mili = zdt.toInstant().toEpochMilli();
-        return mili;
+        return zdt.toInstant().toEpochMilli();
     }
 }
