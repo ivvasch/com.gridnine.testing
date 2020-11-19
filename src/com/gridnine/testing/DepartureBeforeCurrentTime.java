@@ -8,11 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 public class DepartureBeforeCurrentTime implements DoFilterInterface {
-    List<Flight> current = new ArrayList<>();
-    Date date = new Date();
-    long miliCurrent = date.getTime();
-    long miliDepart;
-    LocalDateTime localDateTime;
+    private List<Flight> current = new ArrayList<>();
+    private Date date = new Date();
+    private long miliCurrent = date.getTime();
+    private long miliDepart;
+    private LocalDateTime localDateTime;
 
     @Override
     public List<Flight> doFilter(List<Flight> flights) {

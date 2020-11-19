@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrivedDateEarlyDateDeparted implements DoFilterInterface {
-    List<Flight> earlyDate = new ArrayList<>();
-    long miliDepart;
-    long miliArrived;
+    private List<Flight> earlyDate = new ArrayList<>();
+    private long miliDepart;
+    private long miliArrived;
 
     @Override
     public List<Flight> doFilter(List<Flight> flights) {
