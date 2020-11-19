@@ -5,7 +5,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeOnEarthOver2Hours implements DoFilterInterface {
+public class TimeOnEarthOver2Hours implements FlightFilterInterface {
+    MyZoneId myZoneId = new MyZoneId();
     private List<Flight> twoHours = new ArrayList<>();
     private long miliDepart;
     private long miliArrived;
@@ -16,12 +17,8 @@ public class TimeOnEarthOver2Hours implements DoFilterInterface {
             if (flight.getSegments().size() > 1) {
                 long allTime = 0;
                 for (int i = 0; i < flight.getSegments().size() - 1; i++) {
-
-                    ZoneId id = ZoneId.systemDefault();
-                    ZonedDateTime zdt = ZonedDateTime.of(flight.getSegments().get(i + 1).getDepartureDate(), id);
-                    miliDepart = zdt.toInstant().toEpochMilli();
-                    ZonedDateTime zdt2 = ZonedDateTime.of(flight.getSegments().get(i).getArrivalDate(), id);
-                    miliArrived = zdt2.toInstant().toEpochMilli();
+                    miliDepart = myZoneId.zoneId(flight.getSegments().get(i + 1).getDepartureDate());
+                    miliArrived = myZoneId.zoneId(flight.getSegments().get(i).getArrivalDate());
                     allTime = allTime + (miliDepart - miliArrived);
                     if ((allTime / 7200000) >= 1) {
                         twoHours.add(flight);
