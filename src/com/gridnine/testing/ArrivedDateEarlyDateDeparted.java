@@ -9,6 +9,7 @@ public class ArrivedDateEarlyDateDeparted implements DoFilterInterface {
     List<Flight> earlyDate = new ArrayList<>();
     long miliDepart;
     long miliArrived;
+
     @Override
     public List<Flight> doFilter(List<Flight> flights) {
         for (Flight flight : flights) {
@@ -23,7 +24,7 @@ public class ArrivedDateEarlyDateDeparted implements DoFilterInterface {
                         earlyDate.add(flight);
                     }
                 }
-            } else{
+            } else {
                 ZoneId id = ZoneId.systemDefault();
                 ZonedDateTime zdt = ZonedDateTime.of(flight.getSegments().get(0).getDepartureDate(), id);
                 miliDepart = zdt.toInstant().toEpochMilli();
