@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DepartureBeforeCurrentTime implements FlightFilterInterface {
-    MyZoneId myZoneId = new MyZoneId();
+public class DepartureBeforeCurrentTimeFilterImpl implements FlightFilterInterface {
+    LocalZoneId localZoneId = new LocalZoneId();
     private List<Flight> current = new ArrayList<>();
     private Date date = new Date();
     private long miliCurrent = date.getTime();
@@ -16,8 +16,8 @@ public class DepartureBeforeCurrentTime implements FlightFilterInterface {
     @Override
     public List<Flight> doFilter(List<Flight> flights) {
         for (Flight flight : flights) {
-            miliDepart = myZoneId.zoneId(flight.getSegments().get(0).getDepartureDate());
-            if ((miliCurrent - miliDepart) > 0) {
+            miliDepart = localZoneId.zoneId(flight.getSegments().get(0).getDepartureDate());
+            if ((miliCurrent - miliDepart) < 0) {
                 current.add(flight);
             }
         }

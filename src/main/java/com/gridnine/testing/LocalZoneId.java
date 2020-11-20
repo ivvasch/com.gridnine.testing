@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class MyZoneId {
+public class LocalZoneId {
     private LocalDateTime localDateTime;
 
     public long zoneId(LocalDateTime localDateTime) {

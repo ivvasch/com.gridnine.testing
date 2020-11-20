@@ -11,13 +11,14 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Flight> list = FlightBuilder.createFlights();
-        FlightFilterInterface departureBeforeCurrentTime = new DepartureBeforeCurrentTime();
+
+        FlightFilterInterface departureBeforeCurrentTime = new DepartureBeforeCurrentTimeFilterImpl();
         System.out.println(departureBeforeCurrentTime.doFilter(list));
-
-        FlightFilterInterface arrivedDateEarlyDateDeparted = new ArrivedDateEarlyDateDeparted();
+        System.out.println();
+        FlightFilterInterface arrivedDateEarlyDateDeparted = new ArrivedDateEarlyDateDepartedFilterImpl();
         System.out.println(arrivedDateEarlyDateDeparted.doFilter(list));
-
-        FlightFilterInterface time = new TimeOnEarthOver2Hours();
+        System.out.println();
+        FlightFilterInterface time = new TimeOnEarthOver2HoursFilterImpl();
         System.out.println(time.doFilter(list));
 
     }

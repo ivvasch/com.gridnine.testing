@@ -1,12 +1,10 @@
 package com.gridnine.testing;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeOnEarthOver2Hours implements FlightFilterInterface {
-    MyZoneId myZoneId = new MyZoneId();
+public class TimeOnEarthOver2HoursFilterImpl implements FlightFilterInterface {
+    LocalZoneId localZoneId = new LocalZoneId();
     private List<Flight> twoHours = new ArrayList<>();
     private long miliDepart;
     private long miliArrived;
@@ -17,10 +15,10 @@ public class TimeOnEarthOver2Hours implements FlightFilterInterface {
             if (flight.getSegments().size() > 1) {
                 long allTime = 0;
                 for (int i = 0; i < flight.getSegments().size() - 1; i++) {
-                    miliDepart = myZoneId.zoneId(flight.getSegments().get(i + 1).getDepartureDate());
-                    miliArrived = myZoneId.zoneId(flight.getSegments().get(i).getArrivalDate());
+                    miliDepart = localZoneId.zoneId(flight.getSegments().get(i + 1).getDepartureDate());
+                    miliArrived = localZoneId.zoneId(flight.getSegments().get(i).getArrivalDate());
                     allTime = allTime + (miliDepart - miliArrived);
-                    if ((allTime / 7200000) >= 1) {
+                    if ((allTime / 7200000) <= 1) {
                         twoHours.add(flight);
                     }
                 }

@@ -5,16 +5,13 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class TimeOnEarthOver2HoursTest {
-
+public class DepartureBeforeCurrentTimeFilterImplTest {
     @Test
     public void doFilter() {
         List<Flight> flightList = FlightBuilder.createFlights();
-        FlightFilterInterface filter = new TimeOnEarthOver2Hours();
+        FlightFilterInterface filter = new DepartureBeforeCurrentTimeFilterImpl();
         List<Flight> flights = filter.doFilter(flightList);
 
-        Assert.assertEquals(2, flights.size());
+        Assert.assertEquals(5, flights.size());
     }
 }
